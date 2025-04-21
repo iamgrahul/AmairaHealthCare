@@ -4,18 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amaira Healthcare Centre</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-function callUs() {
-  alert("Call Us");
+function callUsForDentalAppointment() {
+  window.open('tel:+91-6387053735');
 }
-function locateUs() {
-  alert("Locate Us");
+function callUsForMedicalAppointment() {
+  window.open('tel:+91-9336477677');
 }
 function rateUs() {
   alert("Rate Us");
 }
+function locateUs() {
+var mapProp= {
+  center:new google.maps.LatLng(26.4337069,80.3301506),
+  zoom:5,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
 </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABpR4G7vJUDB6bABhI-slR0K28jCWQ8VA&callback=locateUs"></script>
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
@@ -24,7 +32,8 @@ function rateUs() {
 
   <!-- Buttons -->
   <div class="space-y-4 w-full max-w-xs text-center">
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUs()">Call Us</button>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForMedicalAppointment()">Call For Medical Appointment</button>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForDentalAppointment()">Call For Dental Appointment</button>
     <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="locateUs()">Locate Us</button>
     <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="rateUs()">Rate Us</button>
   </div>
