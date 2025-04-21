@@ -1,15 +1,22 @@
-<html>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amaira Healthcare Centre</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
-<p>Click the button to display an alert box.</p>
+  <!-- Logo -->
+  <img src="https://via.placeholder.com/150x50?text=Logo" alt="Logo" class="mb-10 w-40 sm:w-48 md:w-56" />
 
-<button onclick="myFunction()">Press this button</button>
-
-<script>
-function myFunction() {
-  alert("Hello! I am an alert box!");
-}
-</script>
+  <!-- Buttons -->
+  <div class="space-y-4 w-full max-w-xs text-center">
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Call Us</button>
+    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Locate Us</button>
+    <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Rate Us</button>
+  </div>
 
 </body>
 </html>
