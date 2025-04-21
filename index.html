@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amaira Healthcare Centre</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+function callUs() {
+  alert("Call Us");
+}
+function locateUs() {
+  alert("Locate Us");
+}
+function rateUs() {
+  alert("Rate Us");
+}
+</script>
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
   <!-- Logo -->
-  <img src="https://iamgrahul.github.io/AmairaHealthCare/logo.png" alt="Logo" class="mb-10 w-40 sm:w-48 md:w-56" />
+  <img src="images/logo.png" alt="Logo" class="mb-10 w-40 sm:w-48 md:w-56" />
 
   <!-- Buttons -->
   <div class="space-y-4 w-full max-w-xs text-center">
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Call Us</button>
-    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Locate Us</button>
-    <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow">Rate Us</button>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUs()">Call Us</button>
+    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="locateUs()">Locate Us</button>
+    <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="rateUs()">Rate Us</button>
   </div>
 
 </body>
