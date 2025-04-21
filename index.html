@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amaira Healthcare Centre</title>
   <script>
+function callUsForDentalAppointment() {
+  window.location.href = 'tel:+91-6387053735';
+}
+function callUsForMedicalAppointment() {
+    window.location.href = 'tel:+91-9336477677';
+}
 function rateUs() {
   alert("Rate Us");
 }
@@ -26,8 +32,8 @@ var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
   <!-- Buttons -->
   <div class="space-y-4 w-full max-w-xs text-center">
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" href="tel:+91-9336477677">Call For Medical Appointment</button>
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" href="tel:+91-9336477677">Call For Dental Appointment</button>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForMedicalAppointment()">Call For Medical Appointment</button>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForDentalAppointment()">Call For Dental Appointment</button>
     <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="locateUs()">Locate Us</button>
     <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="rateUs()">Rate Us</button>
   </div>
