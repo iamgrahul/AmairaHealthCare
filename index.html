@@ -1,40 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amaira Healthcare Centre</title>
-  <script>
-function callUsForDentalAppointment() {
-  window.location.href = 'tel:+91-6387053735';
-}
-function callUsForMedicalAppointment() {
-    window.location.href = 'tel:+91-9336477677';
-}
-function rateDentalTeam() {
-  window.location.href = "https://g.page/r/CSb84KMOOOYHEAE/review"
-}
-function rateMedicalTeam() {
-  window.location.href = "https://g.page/r/CTCIIY4UlQz4EAE/review"
-}
-function locateUs() {
-window.location.href = "https://www.google.com/maps?q=26.43363,80.33319"
-}
-</script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Best Child Vaccination & Dentist in Kanpur | Amaira Healthcare</title>
+    <meta name="description" content="Amaira Healthcare Kanpur: Best Child Vaccination, Newborn Care & Pediatrician. Expert Dental Implants & Generic Pharmacy. Save 50-90% on generic medicine." />
+    <meta name="keywords" content="Child Vaccination Kanpur, Kids Vaccination, New Born Care Kanpur, Best Vaccination in City, Most Experienced Child Specialist Kanpur, Generic Pharmacy Kanpur, Generic Medicine Kanpur, Best Dentist Kanpur, Dental Implants, Clear Aligners, Dr. Pradeep Kumar, Dr. Prachi Gupta" />
+    <link rel="canonical" href="https://amairahealthcare.com" />
+
+    <meta property="og:title" content="Amaira Healthcare | Best Child Vaccination & Dental Centre Kanpur" />
+    <meta property="og:description" content="Most experienced Child Specialist and Best Vaccination Center in the city. Save 50-90% at our Generic Pharmacy." />
+    <meta property="og:image" content="images/logo.png" />
+    <meta property="og:url" content="https://amairahealthcare.com" />
+    <meta property="og:type" content="website" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalBusiness",
+      "name": "Amaira Healthcare Centre & Vaccination Hub",
+      "alternateName": "Amaira Healthcare",
+      "image": "images/logo.png",
+      "@id": "https://amairahealthcare.com",
+      "url": "https://amairahealthcare.com",
+      "telephone": "+919354042395",
+      "priceRange": "$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Your Specific Address Here",
+        "addressLocality": "Kanpur",
+        "addressRegion": "UP",
+        "postalCode": "208011",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 26.43363,
+        "longitude": 80.33319
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "10:00",
+        "closes": "20:00"
+      },
+      "medicalSpecialty": ["Pediatrics", "Vaccination", "Dentistry", "Pharmacy"],
+      "description": "The most experienced child specialist and best vaccination center in Kanpur. Providing newborn care and affordable generic medicines."
+    }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7Y1D58JCQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q7Y1D58JCQ');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 1); box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.05); }
+        .tap-scale:active { transform: scale(0.97); transition: 0.1s; }
+        .gradient-border-blue { border-left: 4px solid #3b82f6; }
+        .gradient-border-indigo { border-left: 4px solid #6366f1; }
+        .service-badge { background: #f1f5f9; color: #475569; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    </style>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABpR4G7vJUDB6bABhI-slR0K28jCWQ8VA&libraries=places&callback=initApp"></script>
+
+    <script>
+        const clinic = { lat: 26.43363, lng: 80.33319 };
+        const WHATSAPP_NUMBER = "919354042395";
+
+        function initApp(){
+            lucide.createIcons();
+            initReviews();
+            getUserLocation();
+        }
+
+        function callMedical(){ gtag('event','call_medical'); location.href="tel:+919336477677"; }
+        function callDental(){ gtag('event','call_dental'); location.href="tel:+916387053735"; }
+        
+        function whatsappContact(){ 
+            gtag('event','whatsapp_click'); 
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank'); 
+        }
+
+        function submitAppointment(){
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            if(!name || !phone) return alert("Please enter your name and phone number");
+            gtag('event','appointment_submit');
+            const text = encodeURIComponent(`Hello Amaira Healthcare, I am ${name} (${phone}). I'm interested in booking an appointment/medicine.`);
+            location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+        }
+
+        function initReviews(){
+            const service = new google.maps.places.PlacesService(document.createElement('div'));
+            function load(placeId, id){
+                service.getDetails({ placeId, fields:['rating'] }, (place, status)=>{
+                    if(status === google.maps.places.PlacesServiceStatus.OK) {
+                        document.getElementById(id).innerHTML = `<div class="flex items-center gap-1 text-yellow-500 font-bold text-[10px]"><i data-lucide="star" class="w-3 h-3 fill-yellow-500"></i> ${place.rating} Google Rating</div>`;
+                        lucide.createIcons();
+                    }
+                });
+            }
+            load("ChIJ26ARBhBHnDkRMIghjhSVDPg", "reviews-pradeep");
+            load("ChIJg4aKffJHnDkRJvzgow445gc", "reviews-prachi");
+        }
+
+        function getUserLocation(){
+            if(!navigator.geolocation) return;
+            navigator.geolocation.getCurrentPosition(pos => {
+                new google.maps.DistanceMatrixService().getDistanceMatrix({
+                    origins: [{lat: pos.coords.latitude, lng: pos.coords.longitude}],
+                    destinations: [clinic],
+                    travelMode: 'DRIVING'
+                }, res => {
+                    const d = res.rows[0].elements[0];
+                    if(d.status === "OK") {
+                        document.getElementById("distance").innerText = d.distance.text;
+                        document.getElementById("eta").innerText = d.duration.text;
+                    }
+                });
+            });
+        }
+
+        function navigateToClinic(){
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`);
+        }
+    </script>
 </head>
-<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
-  <!-- Logo -->
-  <img src="images/logo.png" alt="Logo" class="mb-10 w-40 sm:w-48 md:w-56" />
+<body class="pb-10">
 
-  <!-- Buttons -->
-  <div class="space-y-4 w-full max-w-xs text-center">
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForMedicalAppointment()">Call For Medical Appointment</button>
-    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="callUsForDentalAppointment()">Call For Dental Appointment</button>
-    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="locateUs()">Locate Us</button>
-    <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="rateMedicalTeam()">Rate Our Medical Services</button>
-    <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-xl shadow" onclick="rateDentalTeam()">Rate Our Dental Services</button>
-  </div>
+<div class="max-w-md mx-auto px-4 pt-6 space-y-6">
+
+    <header class="text-center space-y-3">
+        <div class="w-20 h-20 bg-white rounded-2xl mx-auto flex items-center justify-center shadow-sm border border-slate-100">
+            <img src="images/logo.png" alt="Amaira Healthcare Centre Logo" class="w-16 h-auto" onerror="this.src='https://ui-avatars.com/api/?name=Amaira+Healthcare&background=0D8ABC&color=fff'"/>
+        </div>
+        <div>
+            <h1 class="text-xl font-bold text-slate-900 leading-tight">Amaira Healthcare Centre</h1>
+            <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mt-1">Pharmacy • Best Child Vaccination • Dental</p>
+        </div>
+        <div class="inline-flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-50 text-[10px] font-bold text-slate-600">
+            <span class="flex items-center gap-1"><i data-lucide="navigation" class="w-3 h-3 text-blue-500"></i> <span id="distance">...</span></span>
+            <span class="w-px h-3 bg-slate-200"></span>
+            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-orange-500"></i> <span id="eta">-- min</span></span>
+        </div>
+    </header>
+
+    <section class="bg-emerald-600 rounded-3xl p-5 text-white shadow-lg shadow-emerald-100 overflow-hidden relative">
+        <div class="relative z-10">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-widest bg-emerald-700 px-2 py-1 rounded">Generic Pharmacy Kanpur</span>
+                <span class="text-xs font-black">50-90% OFF</span>
+            </div>
+            <h2 class="text-lg font-bold leading-tight mb-2">Save on Generic Medicine</h2>
+            <p class="text-[11px] text-emerald-50 leading-relaxed mb-4">
+                Massive discounts on regular <b>generic medicine</b> for BP, Sugar, and Prostate. Save 50-90% on high-quality medicine at our <b>Generic Pharmacy</b>.
+            </p>
+            <button onclick="whatsappContact()" class="w-full bg-white text-emerald-700 font-bold py-3 rounded-xl text-xs tap-scale flex items-center justify-center gap-2">
+                <i data-lucide="shopping-pills" class="w-4 h-4"></i> Check Medicine Price
+            </button>
+        </div>
+        <i data-lucide="pill" class="absolute -bottom-4 -right-4 w-24 h-24 text-emerald-500 opacity-20 -rotate-12"></i>
+    </section>
+
+    <div class="grid grid-cols-2 gap-3">
+        <button onclick="callMedical()" class="tap-scale flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-blue-50 shadow-sm gap-2">
+            <div class="bg-blue-100 p-2.5 rounded-xl text-blue-600"><i data-lucide="baby" class="w-5 h-5"></i></div>
+            <span class="text-xs font-bold text-slate-800">Child Specialist</span>
+        </button>
+        <button onclick="callDental()" class="tap-scale flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-indigo-50 shadow-sm gap-2">
+            <div class="bg-indigo-100 p-2.5 rounded-xl text-indigo-600"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
+            <span class="text-xs font-bold text-slate-800">Dental Care</span>
+        </button>
+    </div>
+
+    <section class="glass-card rounded-3xl p-5" aria-labelledby="ped-grid">
+        <div class="flex items-center justify-between mb-4">
+            <h2 id="ped-grid" class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-blue-500"></i> Best Vaccination Hub
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <div class="service-badge">Child Vaccination</div>
+            <div class="service-badge">Newborn Care</div>
+            <div class="service-badge">Kids Vaccination</div>
+            <div class="service-badge">Disease Treatment</div>
+        </div>
+    </section>
+
+    <section class="glass-card rounded-3xl p-5" aria-labelledby="dent-grid">
+        <div class="flex items-center justify-between mb-4">
+            <h2 id="dent-grid" class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                <i data-lucide="activity" class="w-4 h-4 text-indigo-500"></i> Dental Surgery
+            </h2>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <div class="service-badge">Clear Aligners</div>
+            <div class="service-badge">Dental Implants</div>
+            <div class="service-badge">Painless RCT</div>
+            <div class="service-badge">Teeth Alignment</div>
+            <div class="service-badge">Caps & Crowns</div>
+            <div class="service-badge">Cavity Removal</div>
+        </div>
+    </section>
+
+    <article class="glass-card rounded-3xl p-5 gradient-border-blue relative overflow-hidden">
+        <div class="flex justify-between items-start mb-3">
+            <div>
+                <h3 class="font-bold text-slate-900 text-sm">Dr. Pradeep Kumar</h3>
+                <p class="text-[10px] text-blue-600 font-bold uppercase tracking-wider">Most Experienced Child Specialist</p>
+            </div>
+            <div class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black uppercase">40+ Yrs Exp</div>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            Kanpur's veteran child specialist providing <b>Best Vaccination</b> services and expert <b>Newborn care</b> for over 4 decades.
+        </p>
+        <div id="reviews-pradeep"></div>
+    </article>
+
+    <article class="glass-card rounded-3xl p-5 gradient-border-indigo relative overflow-hidden">
+        <div class="flex justify-between items-start mb-3">
+            <div>
+                <h3 class="font-bold text-slate-900 text-sm">Dr. Prachi Gupta</h3>
+                <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">MDS Orthodontist & Dental Surgeon</p>
+            </div>
+            <div class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] font-black uppercase">10+ Yrs Exp</div>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed mb-3">
+            Leading specialist for <b>Invisible Aligners</b>, <b>Implants</b>, and <b>RCT</b> treatments in Kanpur city.
+        </p>
+        <div id="reviews-prachi"></div>
+    </article>
+
+    <section class="bg-slate-900 rounded-3xl p-6 shadow-xl space-y-4">
+        <div class="text-center">
+            <h3 class="text-white font-bold text-sm">Book Appointment</h3>
+            <p class="text-slate-400 text-[10px]">Priority callback for <b>Vaccination</b> or <b>Dental</b> slots</p>
+        </div>
+        <form class="space-y-2.5" onsubmit="event.preventDefault(); submitAppointment();">
+            <input id="name" type="text" placeholder="Patient Name" required class="w-full bg-slate-800 border-none rounded-xl p-3 text-white text-sm focus:ring-1 focus:ring-emerald-500 outline-none"/>
+            <input id="phone" type="tel" placeholder="Mobile Number" required class="w-full bg-slate-800 border-none rounded-xl p-3 text-white text-sm focus:ring-1 focus:ring-emerald-500 outline-none"/>
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl tap-scale text-sm shadow-lg transition-colors">
+                Confirm Request
+            </button>
+        </form>
+    </section>
+
+    <footer class="glass-card rounded-3xl overflow-hidden">
+        <div class="p-4 flex justify-between items-center bg-white border-b border-slate-50">
+            <span class="text-xs font-bold text-slate-800 flex items-center gap-2"><i data-lucide="map-pinned" class="w-4 h-4 text-slate-400"></i> Clinic Location Kanpur</span>
+            <button onclick="navigateToClinic()" class="text-blue-600 text-[10px] font-bold uppercase tracking-widest">Get Directions</button>
+        </div>
+        <div class="h-40 bg-slate-100">
+            <iframe class="w-full h-full grayscale-[20%]" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.247509531631!2d80.33061507542337!3d26.43158007693527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c47110611a0db%3A0xf90c94248e228830!2sAmaira%20Healthcare%20Centre!5e0!3m2!1sen!2sin!4v1711200000000!5m2!1sen!2sin" 
+                title="Google Maps Location" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </footer>
+
+    <div class="text-center pb-4">
+        <p class="text-[9px] text-slate-400 font-medium tracking-wide uppercase">© 2026 Amaira Healthcare Centre & Pharmacy Kanpur.</p>
+    </div>
+
+</div>
+
 </body>
 </html>
