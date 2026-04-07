@@ -178,18 +178,17 @@
                         /*document.getElementById("distance").innerText = d.distance.text;
                         document.getElementById("eta").innerText = d.duration.text;*/
                         const distanceText = d.distance.text;
-
-// Extract number from "16 m" or "0.2 km"
-let distanceValue = parseFloat(distanceText);
-let isMeters = distanceText.includes("m");
-
-if (isMeters && distanceValue <= 30) {
-  document.getElementById("distance").innerText = "You are at the centre";
-  document.getElementById("eta").innerText = "Welcome 👋";
-} else {
-  document.getElementById("distance").innerText = distanceText;
-  document.getElementById("eta").innerText = d.duration.text;
-}
+                        // Extract number from "16 m" or "0.2 km"
+                        let distanceValue = parseFloat(distanceText);
+                        let isKm = distanceText.includes("km");
+                        let distanceInMeters = isKm ? distanceValue * 1000 : distanceValue;
+                        if (distanceInMeters <= 30) {
+                            document.getElementById("distance").innerText = "You are at the centre";
+                            document.getElementById("eta").innerText = "Welcome 👋";
+                        } else {
+                            document.getElementById("distance").innerText = distanceText;
+                            document.getElementById("eta").innerText = d.duration.text;
+                        }
                     }
                 });
             });
