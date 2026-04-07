@@ -69,6 +69,12 @@
         .gradient-border-blue { border-left: 4px solid #3b82f6; }
         .gradient-border-indigo { border-left: 4px solid #6366f1; }
         .service-badge { background: #f1f5f9; color: #475569; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .social-link { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: white; border: 1px solid #e2e8f0; transition: all 0.2s; }
+        
+        .carousel-viewport { overflow: hidden; position: relative; min-height: 75px; }
+        .review-item { display: none; animation: fadeSlide 0.6s ease-in-out; }
+        .review-item.active { display: block; }
+        @keyframes fadeSlide { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABpR4G7vJUDB6bABhI-slR0K28jCWQ8VA&libraries=places&callback=initApp"></script>
@@ -85,11 +91,7 @@
 
         function callMedical(){ gtag('event','call_medical'); location.href="tel:+919336477677"; }
         function callDental(){ gtag('event','call_dental'); location.href="tel:+916387053735"; }
-        
-        function whatsappContact(){ 
-            gtag('event','whatsapp_click'); 
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank'); 
-        }
+        function whatsappContact(){ gtag('event','whatsapp_click'); window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank'); }
 
         function submitAppointment(){
             const name = document.getElementById("name").value;
@@ -102,16 +104,65 @@
 
         function initReviews(){
             const service = new google.maps.places.PlacesService(document.createElement('div'));
-            function load(placeId, id){
-                service.getDetails({ placeId, fields:['rating'] }, (place, status)=>{
+            function load(placeId, id, writeUrl){
+                service.getDetails({ placeId, fields:['rating', 'reviews', 'url'] }, (place, status)=>{
                     if(status === google.maps.places.PlacesServiceStatus.OK) {
-                        document.getElementById(id).innerHTML = `<div class="flex items-center gap-1 text-yellow-500 font-bold text-[10px]"><i data-lucide="star" class="w-3 h-3 fill-yellow-500"></i> ${place.rating} Google Rating</div>`;
-                        lucide.createIcons();
+                        renderCarousel(place.reviews, place.rating, place.url, id, writeUrl);
                     }
                 });
             }
-            load("ChIJ26ARBhBHnDkRMIghjhSVDPg", "reviews-pradeep");
-            load("ChIJg4aKffJHnDkRJvzgow445gc", "reviews-prachi");
+            // Passing specific write review URLs for each doctor
+            load("ChIJ26ARBhBHnDkRMIghjhSVDPg", "reviews-pradeep", "https://search.google.com/local/writereview?placeid=ChIJ26ARBhBHnDkRMIghjhSVDPg");
+            load("ChIJg4aKffJHnDkRJvzgow445gc", "reviews-prachi", "https://search.google.com/local/writereview?placeid=ChIJg4aKffJHnDkRJvzgow445gc");
+        }
+
+        function renderCarousel(reviews, rating, url, containerId, writeUrl){
+            const container = document.getElementById(containerId);
+            if(!reviews || reviews.length === 0) return;
+
+            let slidesHtml = reviews.map((rev, i) => `
+                <div class="review-item ${i === 0 ? 'active' : ''}">
+                    <p class="text-[10px] text-slate-600 italic leading-tight mb-1">"${rev.text.substring(0, 115)}..."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-[9px] font-bold text-slate-400">- ${rev.author_name}</span>
+                        <div class="flex text-yellow-400 scale-75 origin-right">
+                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-50">
+                    <span class="text-yellow-500 font-bold text-[10px] flex items-center gap-1">
+                        <i data-lucide="star" class="w-3 h-3 fill-yellow-500"></i> ${rating} Google Rating
+                    </span>
+                    <a href="${url}" target="_blank" class="text-[9px] text-blue-500 font-bold uppercase">View All</a>
+                </div>
+                <div class="carousel-viewport">${slidesHtml}</div>
+                <div class="mt-3">
+                    <a href="${writeUrl}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 bg-slate-50 text-slate-900 text-[10px] font-bold py-2 rounded-lg border border-slate-100 tap-scale">
+                        <i data-lucide="edit-3" class="w-3 h-3"></i> Write a Google Review
+                    </a>
+                </div>
+            `;
+            lucide.createIcons();
+            startRotation(containerId);
+        }
+
+        function startRotation(containerId){
+            let current = 0;
+            const slides = document.getElementById(containerId).querySelectorAll('.review-item');
+            if(slides.length <= 1) return;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 5000);
         }
 
         function getUserLocation(){
@@ -147,7 +198,7 @@
         </div>
         <div>
             <h1 class="text-xl font-bold text-slate-900 leading-tight">Amaira Healthcare Centre</h1>
-            <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mt-1">Pharmacy • Child Vaccination • Dental</p>
+            <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mt-1">Pharmacy • Best Child Vaccination • Dental</p>
         </div>
         <div class="inline-flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-50 text-[10px] font-bold text-slate-600">
             <span class="flex items-center gap-1"><i data-lucide="navigation" class="w-3 h-3 text-blue-500"></i> <span id="distance">...</span></span>
@@ -167,7 +218,7 @@
                 Massive discounts on regular <b>generic medicine</b> for BP, Sugar, and Prostate. Save 50-90% on high-quality medicine at our <b>Generic Pharmacy</b>.
             </p>
             <button onclick="whatsappContact()" class="w-full bg-white text-emerald-700 font-bold py-3 rounded-xl text-xs tap-scale flex items-center justify-center gap-2">
-                <i data-lucide="shopping-pills" class="w-4 h-4"></i> Check Medicine Price
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Check Medicine Price
             </button>
         </div>
         <i data-lucide="pill" class="absolute -bottom-4 -right-4 w-24 h-24 text-emerald-500 opacity-20 -rotate-12"></i>
@@ -222,10 +273,9 @@
             </div>
             <div class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black uppercase">40+ Yrs Exp</div>
         </div>
-        <p class="text-xs text-slate-600 leading-relaxed mb-3">
-            Kanpur's veteran child specialist providing <b>Best Vaccination</b> services and expert <b>Newborn care</b> for over 4 decades.
-        </p>
-        <div id="reviews-pradeep"></div>
+        <div id="reviews-pradeep" class="min-h-[85px]">
+            <p class="text-[10px] text-slate-400">Loading reviews...</p>
+        </div>
     </article>
 
     <article class="glass-card rounded-3xl p-5 gradient-border-indigo relative overflow-hidden">
@@ -234,12 +284,11 @@
                 <h3 class="font-bold text-slate-900 text-sm">Dr. Prachi Gupta</h3>
                 <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">MDS Orthodontist & Dental Surgeon</p>
             </div>
-            <div class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] font-black uppercase">10+ Yrs Exp</div>
+            <div class="bg-indigo-600 text-white px-2 py-1 rounded text-[9px] font-black uppercase">12+ Yrs Exp</div>
         </div>
-        <p class="text-xs text-slate-600 leading-relaxed mb-3">
-            Leading specialist for <b>Invisible Aligners</b>, <b>Implants</b>, and <b>RCT</b> treatments in Kanpur city.
-        </p>
-        <div id="reviews-prachi"></div>
+        <div id="reviews-prachi" class="min-h-[85px]">
+            <p class="text-[10px] text-slate-400">Loading reviews...</p>
+        </div>
     </article>
 
     <section class="bg-slate-900 rounded-3xl p-6 shadow-xl space-y-4">
@@ -263,7 +312,7 @@
         </div>
         <div class="h-40 bg-slate-100">
             <iframe class="w-full h-full grayscale-[20%]" 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.247509531631!2d80.33061507542337!3d26.43158007693527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c47110611a0db%3A0xf90c94248e228830!2sAmaira%20Healthcare%20Centre!5e0!3m2!1sen!2sin!4v1711200000000!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3572.247509531631!2d80.33061507542337!3d26.43158007693527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c47110611a0db%3A0xf90c94248e228830!2sAmaira%20Healthcare%20Centre!5e0!3m2!1sen!2sin!4v1711200000000!5m2!1sen!2sin2" 
                 title="Google Maps Location" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </footer>
