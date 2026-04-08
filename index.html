@@ -193,7 +193,17 @@
                 });
             });
         }
-
+        function toggleFloating(showFull) {
+            const container = document.getElementById("floatingContainer");
+            const toggle = document.getElementById("floatingToggle");
+            if (showFull) {
+                container.style.display = "flex";
+                toggle.style.display = "none";
+            } else {
+                container.style.display = "none";
+                toggle.style.display = "flex";
+            }
+        }
         function navigateToClinic(){
             window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`);
         }
@@ -345,9 +355,34 @@
     </div>
 
 </div>
-<a href="https://wa.me/919354042395" target="_blank"
-class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg">
-💬
-</a>
+<!-- Expanded Buttons -->
+<div id="floatingContainer" class="fixed bottom-5 right-5 flex flex-col items-end gap-3">
+
+  <!-- Collapse Button -->
+  <button onclick="toggleFloating(false)" 
+    class="bg-white border text-gray-600 w-8 h-8 rounded-full shadow flex items-center justify-center">
+    ✕
+  </button>
+
+  <!-- Navigate -->
+  <a href="https://www.google.com/maps/dir/?api=1&destination=26.43363,80.33319" 
+     target="_blank"
+     class="bg-blue-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center">
+    <i data-lucide="navigation" class="w-5 h-5"></i>
+  </a>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919354042395" target="_blank"
+     class="bg-green-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center">
+    💬
+  </a>
+
+</div>
+
+<!-- Collapsed Small Button -->
+<button id="floatingToggle" onclick="toggleFloating(true)" 
+  class="hidden fixed bottom-5 right-5 bg-gray-800 text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center">
+  +
+</button>
 </body>
 </html>
