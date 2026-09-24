@@ -77,8 +77,77 @@
         .review-item { display: none; animation: fadeSlide 0.6s ease-in-out; }
         .review-item.active { display: block; }
         @keyframes fadeSlide { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
-    </style>
+        /* Mobile Navigation Popup */
+#navigationPopup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
 
+#navigationPopup.show {
+    display: flex;
+}
+
+.navigation-popup-card {
+    width: 100%;
+    max-width: 360px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.20);
+}
+
+.navigation-popup-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    border-radius: 18px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation-popup-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.navigation-popup-btn {
+    border: 0;
+    border-radius: 12px;
+    padding: 13px 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.navigation-popup-cancel {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.navigation-popup-navigate {
+    background: #2563eb;
+    color: white;
+}
+
+/* Don't show popup on desktop */
+@media (min-width: 768px) {
+    #navigationPopup {
+        display: none !important;
+    }
+}
+    </style>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABpR4G7vJUDB6bABhI-slR0K28jCWQ8VA&libraries=places&callback=initApp"></script>
 
     <script>
@@ -209,11 +278,68 @@
         function navigateToClinic(){
             window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`);
         }
+        function isMobileDevice() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function showNavigationPopup() {
+    if (!isMobileDevice()) return;
+
+    document.getElementById("navigationPopup").classList.add("show");
+}
+
+function closeNavigationPopup() {
+    document.getElementById("navigationPopup").classList.remove("show");
+}
+
+function navigateFromPopup() {
+    closeNavigationPopup();
+
+    const mapsUrl =
+        `https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`;
+
+    window.location.href = mapsUrl;
+}
     </script>
 </head>
 
 <body class="pb-10">
+<div id="navigationPopup">
 
+    <div class="navigation-popup-card">
+
+        <div class="navigation-popup-icon">
+            <i data-lucide="map-pin" class="w-7 h-7"></i>
+        </div>
+
+        <h2 class="text-lg font-bold text-slate-900">
+            Visit Amaira Healthcare?
+        </h2>
+
+        <p class="text-xs text-slate-500 leading-relaxed mt-2">
+            Would you like to navigate to Amaira Healthcare Centre,
+            Kidwai Nagar, Kanpur?
+        </p>
+
+        <div class="navigation-popup-actions">
+
+            <button
+                onclick="closeNavigationPopup()"
+                class="navigation-popup-btn navigation-popup-cancel">
+                Maybe Later
+            </button>
+
+            <button
+                onclick="navigateFromPopup()"
+                class="navigation-popup-btn navigation-popup-navigate">
+                Navigate
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <div class="max-w-md mx-auto px-4 pt-6 space-y-6">
 
     <header class="text-center space-y-3">
