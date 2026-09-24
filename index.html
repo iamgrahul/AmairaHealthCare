@@ -309,7 +309,7 @@ function setNavigationPopupLanguage() {
         hindi ? "अभी नहीं" : "Maybe Later";
 
     document.getElementById("navigationPopupNavigate").textContent =
-        hindi ? "नेविगेट करें" : "Navigate";
+        hindi ? "जाएँ" : "Navigate";
 }
 
 function showNavigationPopup() {
@@ -354,27 +354,24 @@ document.addEventListener("DOMContentLoaded", function () {
             <i data-lucide="map-pin" class="w-7 h-7"></i>
         </div>
 
-        <h2 class="text-lg font-bold text-slate-900">
-            Visit Amaira Healthcare?
-        </h2>
+        <h2 id="navigationPopupTitle" class="text-lg font-bold text-slate-900"></h2>
 
-        <p class="text-xs text-slate-500 leading-relaxed mt-2">
-            Would you like to navigate to Amaira Healthcare Centre,
-            Kidwai Nagar, Kanpur?
-        </p>
+        <p id="navigationPopupMessage" class="text-xs text-slate-500 leading-relaxed mt-2"></p>
 
         <div class="navigation-popup-actions">
 
             <button
+                id="navigationPopupCancel"
+                type="button"
                 onclick="closeNavigationPopup()"
                 class="navigation-popup-btn navigation-popup-cancel">
-                Maybe Later
             </button>
 
             <button
+                id="navigationPopupNavigate"
+                type="button"
                 onclick="navigateFromPopup()"
                 class="navigation-popup-btn navigation-popup-navigate">
-                Navigate
             </button>
 
         </div>
