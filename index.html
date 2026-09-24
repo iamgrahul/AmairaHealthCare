@@ -157,7 +157,6 @@
         function initApp(){
             lucide.createIcons();
             initReviews();
-            getUserLocation();
         }
 
         function callMedical(){ gtag('event','call_medical'); location.href="tel:+919336477677"; }
@@ -328,6 +327,14 @@ function closeNavigationPopup() {
     document.getElementById("navigationPopup").classList.remove("show");
 }
 
+function stayOnWebsite() {
+    closeNavigationPopup();
+
+    // Request location permission only after the visitor chooses
+    // to stay on the website.
+    getUserLocation();
+}
+
 function navigateFromPopup() {
     closeNavigationPopup();
 
@@ -363,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <button
                 id="navigationPopupCancel"
                 type="button"
-                onclick="closeNavigationPopup()"
+                onclick="stayOnWebsite()"
                 class="navigation-popup-btn navigation-popup-cancel">
             </button>
 
