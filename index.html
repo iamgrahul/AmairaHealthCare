@@ -279,7 +279,8 @@
             window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`);
         }
         function isMobileDevice() {
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+        || window.innerWidth < 768;
 }
 
 function showNavigationPopup() {
@@ -300,6 +301,12 @@ function navigateFromPopup() {
 
     window.location.href = mapsUrl;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        showNavigationPopup();
+    }, 1000);
+});
     </script>
 </head>
 
