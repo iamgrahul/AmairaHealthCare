@@ -283,10 +283,45 @@
         || window.innerWidth < 768;
 }
 
+function isHindiLanguage() {
+    const languages = [
+        ...(navigator.languages || []),
+        navigator.language || navigator.userLanguage || ""
+    ];
+
+    return languages.some(lang =>
+        String(lang).toLowerCase().startsWith("hi")
+    );
+}
+
+function setNavigationPopupLanguage() {
+    const hindi = isHindiLanguage();
+
+    document.getElementById("navigationPopupTitle").textContent =
+        hindi ? "अमाइरा हेल्थकेयर जाएँ?" : "Visit Amaira Healthcare?";
+
+    document.getElementById("navigationPopupMessage").textContent =
+        hindi
+            ? "क्या आप अमाइरा हेल्थकेयर सेंटर, किदवई नगर, कानपुर के लिए नेविगेट करना चाहते हैं?"
+            : "Would you like to navigate to Amaira Healthcare Centre, Kidwai Nagar, Kanpur?";
+
+    document.getElementById("navigationPopupCancel").textContent =
+        hindi ? "अभी नहीं" : "Maybe Later";
+
+    document.getElementById("navigationPopupNavigate").textContent =
+        hindi ? "नेविगेट करें" : "Navigate";
+}
+
 function showNavigationPopup() {
     if (!isMobileDevice()) return;
 
+    setNavigationPopupLanguage();
+
     document.getElementById("navigationPopup").classList.add("show");
+
+    if (typeof lucide !== "undefined") {
+        lucide.createIcons();
+    }
 }
 
 function closeNavigationPopup() {
